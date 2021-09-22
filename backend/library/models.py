@@ -18,13 +18,6 @@ class Bio(models.Model):
         return self.text
 
 
-class Bio1(Author):
-    text = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.text
-
-
 class Book(models.Model):
     title = models.CharField(max_length=64)
     authors = models.ManyToManyField(Author)
