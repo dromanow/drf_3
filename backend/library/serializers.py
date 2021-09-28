@@ -17,9 +17,6 @@ class BioSerializer(ModelSerializer):
 
 
 class BookSerializer(ModelSerializer):
-    authors = AuthorSerializer(many=True)
-
     class Meta:
         model = Book
         fields = '__all__'
-
