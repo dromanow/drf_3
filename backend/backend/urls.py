@@ -20,8 +20,8 @@ from library.views import *
 
 router = DefaultRouter()
 router.register('authors', AuthorViewSet, basename='author')
-router.register('bio', BioViewSet, basename='bio')
-router.register('book', BookViewSet)
+router.register('bios', BioViewSet, basename='bio')
+router.register('books', BookViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
