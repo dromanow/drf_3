@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Author, Bio, Book
-from .serializers import AuthorSerializer, BioSerializer, BioSerializer1, BookSerializer
+from .serializers import AuthorSerializer, BioSerializer, HLBioSerializer, BookSerializer
 
 
 class AuthorViewSet(ModelViewSet):
@@ -13,8 +13,8 @@ class BioViewSet(ModelViewSet):
     queryset = Bio.objects.all()
 
 
-class BioViewSet1(ModelViewSet):
-    serializer_class = BioSerializer1
+class HLBioViewSet(ModelViewSet):
+    serializer_class = HLBioSerializer
     queryset = Bio.objects.all()
 
 
