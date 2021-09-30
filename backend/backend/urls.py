@@ -19,8 +19,9 @@ from rest_framework.routers import DefaultRouter
 from library.views import *
 
 router = DefaultRouter()
-router.register('authors', AuthorViewSet, basename='author')
-router.register('bios', BioViewSet, basename='bio')
+router.register('authors', AuthorViewSet)
+router.register('bios', BioViewSet)
+router.register('bios1', BioViewSet1)
 router.register('books', BookViewSet)
 
 urlpatterns = [
