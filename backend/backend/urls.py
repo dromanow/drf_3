@@ -20,8 +20,8 @@ from library.views import *
 
 router = DefaultRouter()
 router.register('authors', AuthorViewSet)
-router.register('bios', BioViewSet)
-router.register('hl_bios', HLBioViewSet)
+router.register('bios', BioViewSet, basename='bio')
+router.register('hl_bios', HLBioViewSet, basename='hl_bio')
 router.register('books', BookViewSet)
 
 urlpatterns = [
