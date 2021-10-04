@@ -9,17 +9,20 @@ class AuthorSerializer(ModelSerializer):
 
 
 class BioSerializer(ModelSerializer):
-    author = HyperlinkedRelatedField(read_only=True, view_name='author-detail')
-
     class Meta:
         model = Bio
         fields = '__all__'
 
 
-class BookSerializer(ModelSerializer):
-    authors = AuthorSerializer(many=True)
+class HLBioSerializer(HyperlinkedModelSerializer):
+    author = HyperlinkedRelatedField(read_only=True, view_name='author-detail')
 
+    class Meta:
+        model = Bio
+        fields = ['text', 'author']
+
+
+class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
-
