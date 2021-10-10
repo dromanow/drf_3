@@ -11,7 +11,7 @@ from .serializers import AuthorSerializer, BioSerializer, BookSerializer
 
 
 class AuthorViewSet(ModelViewSet):
-    permission_classes = [DjangoModelPermissions]
+    # permission_classes = [DjangoModelPermissions]
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
 
