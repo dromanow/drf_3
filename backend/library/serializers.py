@@ -8,6 +8,12 @@ class AuthorSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class AuthorSerializerV2(ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name']
+
+
 class BioSerializer(ModelSerializer):
     author = HyperlinkedRelatedField(read_only=True, view_name='author-detail')
 
