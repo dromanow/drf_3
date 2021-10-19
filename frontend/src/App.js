@@ -1,10 +1,11 @@
 import React from 'react'
-import {HashRouter, Route, Link, Switch, Redirect, BrowserRouter} from 'react-router-dom'
+import {HashRouter, Route, Link, Switch, Redirect, BrowserRouter, } from 'react-router-dom'
 import axios from 'axios'
 import AuthorList from './components/Authors.js';
 import BookList from './components/Books.js';
 import AuthorBookList from './components/AuthorBooks.js';
 import LoginForm from './components/LoginForm.js';
+import BookForm from './components/BookForm.js';
 
 const NotFound = ({location}) => {
     return (<div>Page not found: {location.pathname}</div>)
@@ -44,6 +45,42 @@ class App extends React.Component {
             return {'Authorization': 'Token ' + this.state.token}
         }
         return {}
+    }
+
+//    redirectToBooks() {
+////        let history = useHistory()
+////        history.push('/books')
+//        this.props.location = '/books'
+//    }
+
+    createBook(title, authors) {
+//        console.log(title, authors)
+
+        const headers = this.getHeaders()
+        axios.post('http://127.0.0.1:8000/api/books/', {'title': title, 'authors': authors} , {headers})
+        .then(response => {
+//            const books = response.data
+            this.loadData();
+        })
+        .catch(error => {
+            console.log(error)
+        })
+//        this.redirectToBooks()
+    }
+
+    deleteBook(id) {
+//        console.log(id)
+
+        const headers = this.getHeaders()
+        axios.delete(`http://127.0.0.1:8000/api/books/${id}/`, {headers})
+        .then(response => {
+            this.setState( {
+                'books': this.state.books.filter((book) => book.id != id)
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     loadData() {
@@ -90,6 +127,7 @@ class App extends React.Component {
                         <ul>
                             <li><Link to='/'>Authors</Link></li>
                             <li><Link to='/books'>Books</Link></li>
+                            <li><Link to='/books/create'>Create book</Link></li>
                             <li>
                                 { this.isAuthenticated() ?
                                     <button onClick={()=>this.logout()}>Logout</button> :
@@ -101,7 +139,8 @@ class App extends React.Component {
 
                     <Switch>
                         <Route path='/' exact component={() => <AuthorList authors = {this.state.authors}/>} />
-                        <Route path='/books' exact component={() => <BookList books = {this.state.books}/>} />
+                        <Route path='/books' exact component={() => <BookList books = {this.state.books} deleteBook={(id) => this.deleteBook(id)}/>} />
+                        <Route path='/books/create' exact component={() => <BookForm authors = {this.state.authors} createBook={(title, authors) => this.createBook(title, authors)}/>} />
                         <Route path='/login' exact component={() => <LoginForm getToken={(login, password) => this.getToken(login, password)} />} />
                         <Route path='/author/:id' component={() => <AuthorBookList books = {this.state.books}/>} />
                         <Redirect from='/authors' to='/' />
