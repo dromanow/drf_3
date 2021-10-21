@@ -4,11 +4,6 @@ from .models import Author, Bio, Book
 from .serializers import AuthorSerializer, BioSerializer, BookSerializer, AuthorSerializerV2
 
 
-# class CustomPermission(BasePermission):
-#
-#     def has_permission(self, request, view):
-#         return request.user.is_stuff
-
 
 class AuthorViewSet(ModelViewSet):
     # permission_classes = [DjangoModelPermissions]

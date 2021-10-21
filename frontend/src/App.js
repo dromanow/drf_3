@@ -1,5 +1,5 @@
 import React from 'react'
-import {HashRouter, Route, Link, Switch, Redirect, BrowserRouter, } from 'react-router-dom'
+import {HashRouter, Route, Link, Switch, Redirect, BrowserRouter} from 'react-router-dom'
 import axios from 'axios'
 import AuthorList from './components/Authors.js';
 import BookList from './components/Books.js';
@@ -47,30 +47,18 @@ class App extends React.Component {
         return {}
     }
 
-//    redirectToBooks() {
-////        let history = useHistory()
-////        history.push('/books')
-//        this.props.location = '/books'
-//    }
-
     createBook(title, authors) {
-//        console.log(title, authors)
-
         const headers = this.getHeaders()
         axios.post('http://127.0.0.1:8000/api/books/', {'title': title, 'authors': authors} , {headers})
         .then(response => {
-//            const books = response.data
             this.loadData();
         })
         .catch(error => {
             console.log(error)
         })
-//        this.redirectToBooks()
     }
 
     deleteBook(id) {
-//        console.log(id)
-
         const headers = this.getHeaders()
         axios.delete(`http://127.0.0.1:8000/api/books/${id}/`, {headers})
         .then(response => {

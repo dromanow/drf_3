@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class BookForm extends React.Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class BookForm extends React.Component {
         console.log(this.state.title, this.state.authors)
         this.props.createBook(this.state.title, this.state.authors)
         event.preventDefault()
+        this.props.history.push('/books')
     }
 
     render() {
@@ -49,4 +51,4 @@ class BookForm extends React.Component {
     }
 }
 
-export default BookForm
+export default withRouter(BookForm)
